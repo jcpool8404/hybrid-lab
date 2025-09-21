@@ -16,7 +16,8 @@ It demonstrates firewall configuration, Active Directory, hybrid networking, and
 
 ## 🗂️ Lab Topology
 
-![Hybrid Lab Topology](screenshots/hybrid_lab_topology.png)
+![Hybrid Lab Topology](screenshots/Hybrid%20Lab%20Topology.png)
+
 
 ### On-Premises (VirtualBox)
 - **pfSense Firewall**
