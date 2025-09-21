@@ -16,7 +16,7 @@ The lab connects an **on-premises pfSense firewall and Windows 10 client** to an
 ---
 
 ## Network Diagram (Phase 1)
-![Hybrid Lab Topology](screenshots/Hybrid Lab Topology.png)  
+![Hybrid Lab Topology](screenshots/Hybrid%20Lab%20Topology.png)
 *(High-level network diagram showing on-prem pfSense/Win10 connected to Azure DC01)*
 
 ---
