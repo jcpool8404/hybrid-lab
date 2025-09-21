@@ -1,55 +1,103 @@
-# hybrid-lab
-Hybrid IT lab simulating a small enterprise network. On-prem pfSense firewall with Windows 10 client, connected to Azure VNet hosting Windows Server 2025 AD DC. Demonstrates skills in networking, AD, firewall config, and hybrid cloud integration.
-# Hybrid Home/Azure Lab – Phase 1 Setup
+# Hybrid Enterprise Lab – Phase 1
 
-This project documents the build of a hybrid enterprise-style lab environment designed to showcase hands-on IT and cybersecurity skills.  
-The lab connects an **on-premises pfSense firewall and Windows 10 client** to an **Azure-hosted Windows Server 2025 domain controller (DC01)**, simulating a realistic hybrid enterprise.
+This project simulates a hybrid enterprise environment with **on-premises infrastructure (VirtualBox)** connected to **Azure-hosted resources**.  
+It demonstrates firewall configuration, Active Directory, hybrid networking, and lays the foundation for SIEM integration.
 
 ---
 
-## Lab Objectives
-- Demonstrate understanding of hybrid networking (on-prem + cloud).
-- Build foundational Active Directory and domain-join workflow.
-- Configure pfSense firewall and routing for realistic enterprise architecture.
-- Prepare the environment for future SIEM integration (Splunk/ELK/Wazuh).
+## 🚀 Tech Stack / Tools Used
+- **VirtualBox** – virtualization for on-prem lab machines
+- **pfSense 2.8.1** – firewall & VPN
+- **Windows 10 Pro** – on-prem client machine
+- **Windows Server 2025** – Active Directory Domain Controller (DC01)
+- **Microsoft Azure** – Resource Group, Virtual Network, Subnets, and VNet Gateway
 
 ---
 
-## Network Diagram (Phase 1)
-![Hybrid Lab Topology](screenshots/Hybrid%20Lab%20Topology.png)
-*(High-level network diagram showing on-prem pfSense/Win10 connected to Azure DC01)*
+## 🗂️ Lab Topology
+
+![Hybrid Lab Topology](screenshots/hybrid_lab_topology.png)
+
+### On-Premises (VirtualBox)
+- **pfSense Firewall**
+  - WAN: `192.168.1.206`
+  - LAN: `192.168.56.1/24`
+- **Windows 10 Client**
+  - IP: `192.168.56.10/24`
+  - Default Gateway: `192.168.56.1`
+
+### Azure Cloud (East US 2)
+- **Resource Group:** `HybridLab`
+- **Virtual Network:** `172.16.0.0/16`
+  - Subnet 1: `snet-eastus2-1 (172.16.0.0/24)`
+  - Subnet 2: `GatewaySubnet (172.16.1.0/27)`
+- **VM:** `DC01` – Windows Server 2025
+  - Private IP: `172.16.0.4`
+  - Role: Active Directory Domain Controller
+- **Virtual Network Gateway:** provisioned for future site-to-site VPN
 
 ---
 
-## Screenshots & Configuration
+## 📌 Phase 1 Objectives
+- [x] Deploy pfSense firewall in VirtualBox  
+- [x] Configure LAN/WAN networking  
+- [x] Deploy Windows 10 client and confirm connectivity through pfSense  
+- [x] Create Azure Resource Group, Virtual Network, and Subnets  
+- [x] Deploy Windows Server 2025 VM (DC01) as AD Domain Controller  
+- [ ] Configure site-to-site VPN (pending)  
+- [ ] Join Windows 10 client to Active Directory domain (pending)  
 
-### pfSense Console (VirtualBox)
-![pfSense Console](screenshots/pfsense-console.png)  
-*Shows WAN and LAN interface assignments on pfSense VM.*
+---
 
-### Windows 10 Client – IP Configuration
-![Windows 10 ipconfig](screenshots/win10-ipconfig.png)  
-*Windows 10 client configured with pfSense as default gateway.*
+## 🛠️ Setup Walkthrough
+
+1. **On-Prem Setup**
+   - Install pfSense VM in VirtualBox
+   - Assign WAN (`192.168.1.206`) and LAN (`192.168.56.1/24`)
+   - Connect Windows 10 client to pfSense LAN
+
+2. **Azure Setup**
+   - Create Resource Group: `HybridLab`
+   - Deploy VNet: `172.16.0.0/16` with two subnets
+   - Deploy Windows Server 2025 VM (`DC01`)  
+   - Promote DC01 to Active Directory Domain Controller
+
+3. **Connectivity**
+   - Validate Windows 10 can reach pfSense gateway
+   - Prepare for site-to-site VPN configuration
+
+---
+
+## 📸 Screenshots
+
+### pfSense Console
+![pfSense Console](screenshots/pfsense-console.png)
 
 ### pfSense WebGUI
-![pfSense WebGUI](screenshots/pfsense-webgui.png)  
-*pfSense dashboard confirming system is running and reachable.*
+![pfSense WebGUI](screenshots/pfsense-webgui.png)
+
+### Windows 10 Client – IP Configuration
+![Windows 10 ipconfig](screenshots/win10-ipconfig.png)
 
 ### Azure Resource Group
-![Azure Resource Group](screenshots/azure-rg.png)  
-*All resources for the lab contained in the `HybridLab` resource group.*
+![Azure RG](screenshots/azure-rg.png)
 
 ### Azure Virtual Network
-![Azure VNet](screenshots/azure-vnet.png)  
-*Virtual network with subnets for VM and Gateway.*
+![Azure VNet](screenshots/azure-vnet.png)
 
-### Azure DC01 Overview
-![Azure DC01 VM](screenshots/dc01-overview.png)  
-*Windows Server 2025 VM (DC01) acting as the Domain Controller.*
+### Azure Domain Controller Overview
+![Azure DC01](screenshots/dc01-overview.png)
 
 ---
 
-## Next Steps
-- Configure site-to-site VPN between pfSense and Azure Virtual Network Gateway.
-- Join Windows 10 client to the Active Directory domain.
-- Begin configuring monitoring/visibility stack (Wazuh, Splunk, etc).
+## 🔮 Phase 2 Roadmap
+- Configure and test **site-to-site VPN** between pfSense and Azure  
+- Join Windows 10 client to the Active Directory domain  
+- Deploy SIEM (Splunk, ELK, or Wazuh) for monitoring/log collection  
+- Simulate attack scenarios and document detections  
+
+---
+
+## 📖 Lessons Learned (so far)
+- pfSense is a flexible tool for simulating enterpris
+
